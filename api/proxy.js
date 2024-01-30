@@ -1,15 +1,12 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
+res=async fetch(req, env) {
+    let url = new URL(req.url);
+    url.hostname = "translate.googleapis.com";
+    return fetch(new Request(url, req));
+  },
 module.exports = (req, res) => {
   let target = "translate.googleapis.com";//your website url
-  //   if (
-  //     req.url.startsWith("/api") ||
-  //     req.url.startsWith("/auth") ||
-  //     req.url.startsWith("/banner") ||
-  //     req.url.startsWith("/CollegeTask")
-  //   ) {
-  //     target = "http://106.15.2.32:6969";
-  //   }
 
   createProxyMiddleware({
     target,
